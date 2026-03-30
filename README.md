@@ -1,6 +1,56 @@
+# 학습 강의
 
-# 학습 강의 
-> https://www.youtube.com/watch?v=mvfU-7tdLWs&list=PLQdnHjXZyYadiw5aV3p6DwUdXV2bZuhlN&index=14
+# 목표
+
+## 1. Languages & Build (언어 및 빌드)
+### Java / Kotlin:
+애플리케이션을 만드는 메인 프로그래밍 언어입니다.  
+코틀린은 자바와 100% 호환되면서 더 간결한 코드를 지향합니다.  
+> [코틀린 강의](https://www.youtube.com/watch?v=mvfU-7tdLWs&list=PLQdnHjXZyYadiw5aV3p6DwUdXV2bZuhlN&index=14)
+### Gradle
+프로젝트에 필요한 라이브러리를 가져오고, 코드를 실행 가능한 파일로 빌드해주는 빌드 자동화 도구입니다.
+
+## 2. Frameworks & Web (프레임워크 및 웹)
+### Spring Boot
+복잡한 설정을 자동화하여 스프링 기반 앱을 빠르게 개발하게 돕는 프레임워크입니다.
+### Spring MVC / Webflux
+MVC는 요청마다 스레드를 사용하는 방식, Webflux는 적은 스레드로 많은 요청을 처리하는 비동기 방식의 웹 프레임워크입니다.
+## Netty
+고성능 네트워크 애플리케이션을 만들기 위한 기반 네트워크 프레임워크입니다.
+### Spring Cloud (Gateway/Config)
+마이크로서비스(MSA)에서 관문 역할을 하거나(Gateway), 설정 정보를 한곳에서 관리(Config)하는 도구입니다.
+
+## 3. Databases & Persistence (데이터 및 저장소)
+### JPA/Hibernate
+자바 객체와 DB 테이블을 연결해 주는 데이터 접근 기술입니다.
+### MySQL / MongoDB
+각각 전통적인 표 형태의 관계형 DB와 자유로운 형식의 문서형 DB입니다.
+### Redis
+아주 빠른 속도로 데이터를 넣고 빼는 인메모리 데이터 저장소입니다. (주로 캐시로 사용)
+### Zookeeper
+여러 서버 간의 상태 정보를 동기화하고 관리하는 코디네이터 역할을 합니다.
+
+## 4. Infrastructure & DevOps (인프라 및 자동화)
+### Docker / Kubernetes
+앱을 컨테이너라는 박스에 담아 실행하고, 그 박스들을 수천 대의 서버에서 효율적으로 관리(K8s)합니다.  
+### Istio / Consul / Vault
+컨테이너 간의 통신 관리(Istio), 서비스 위치 찾기(Consul), 암호나 인증키 관리(Vault)를 담당합니다.  
+### GoCD / ArgoCD
+코드를 수정하면 자동으로 배포까지 이어지게 만드는 배포 자동화 도구입니다.  
+### Git
+코드의 버전(수정 이력)을 관리합니다.  
+### Ceph / Harbor
+파일이나 데이터를 저장하는 스토리지(Ceph)와 빌드된 컨테이너 이미지를 보관하는 저장소(Harbor)입니다.
+
+## 5. Data & Observability (데이터 흐름 및 모니터링)
+### Kafka
+대량의 실시간 데이터를 빠르고 안전하게 주고받는 메시징 플랫폼입니다.  
+### ELK (Elasticsearch/Logstash/Kibana)
+로그 데이터를 수집하고 검색하여 시각화하는 도구 세트입니다.  
+### Prometheus / Thanos / Grafana
+시스템 성능 수치(CPU, 메모리 등)를 수집(Prometheus)하고 장기간 보관(Thanos)하며, 그래프로 예쁘게 보여주는(Grafana) 도구입니다.
+
+-----
 
 # 코루틴과 스레드의 차이
 
