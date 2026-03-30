@@ -1,7 +1,6 @@
 fun main() {
     testLines()
-    testTrim()
-    testRepeat()
+//    testTrim()
 }
 
 fun testLines() {
@@ -10,7 +9,7 @@ fun testLines() {
     test = "Hello World\nHelloooooo World\nHeeeellllloooo Wooorld"
 
     test
-        .lines() // Stream<String> 을 반환한다.
+        .lines() // Stream<String> 을 반환한다, 개행문자 기준으로 자른다.
         .forEach(System.out::println)
 }
 
@@ -31,28 +30,25 @@ fun testTrim() {
      */
 
     /** Kotlin
+     *
      * strip보다 더 강력한 기능의 동일한 이름의 함수들을 제공한다. (유니코드 포함)
+     *
      * trim(): 양쪽 공백 제거
+     *
      * trimStart(): 앞쪽 공백 제거
+     *
      * trimEnd(): 뒤쪽 공백 제거
      */
 
-    var test = "   Hello World "
+    val test = "   Hello World "
 
-    println(test.trim())
-    println(test.trimStart())
-    println(test.trimEnd())
+    println(test.trim()) // "Hello World"
+    println(test.trimStart()) // "Hello World "
+    println(test.trimEnd()) // "   Hello World"
 }
 
-fun testRepeat() {
-    var test : String = "*"
 
-    println(test.repeat(5)) // *****
-    println(test.repeat(0)) // 빈 문자열
-    println(test.repeat(-1)) // 음수면 Error
-}
-
-// JAVA 21
+// JAVA 21 : var과 val 지원!
 //fun testStringTemplates() {
 //    val name : String = "Hello World" // val: 불변 변수, var: 가변 변수
 //    println(STR."Hello $name!")

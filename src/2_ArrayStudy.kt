@@ -12,6 +12,9 @@ fun createArray() {
 
 fun lambdaAndArray() {
     val size = readLine()!!.toInt() // 반드시 입력은 int 형으로
+    // !!: Not-Null 연산자
+    // null.toInt() 시 에러 남.
+    // 그러나 확실히 값이 존재할 때 !!를 써서 에러가 나지 않음을 확신시켜준다.
 
     val squares = Array(size) { // size 만큼 array에 중괄호 내부 내용을 add한다.
         (it + 1) * (it + 1) // it는 자동 생성되는 변수로, 인덱스를 나타낸다.

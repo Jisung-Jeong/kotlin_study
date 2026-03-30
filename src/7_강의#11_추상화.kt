@@ -1,11 +1,15 @@
-abstract class Animal(val name: String, val age: Int, val type: String) {
+abstract class Animal2(val name: String, val age: Int, val type: String) {
+    // 추상 메서드가 있는 클래스는, 추상 클래스가 된다.
+    // 따라서 클래스와 메서드 둘 다 abstract 키워드를 써준다.
     abstract fun eat()
+
     fun sniff() {
         println("킁킁")
     }
 }
 
-class Dog(name: String, age: Int, type: String) : Animal(name, age, "개") {
+class Dog2(name: String, age: Int, type: String) : Animal1(name, age, "개") {
+    // 추상 클래스를 상속받아, 추상 메서드를 구현 시, override 키워드를 써준다.
     override fun eat() {
         println("개가 밥을 먹습니다.")
     }
@@ -16,7 +20,9 @@ class Dog(name: String, age: Int, type: String) : Animal(name, age, "개") {
 // 구현부가 없으면 abstract 클래스로 간주합니다.(구현 필수)
 
 interface Runner {
-    fun run() // abstract 함수로 간주
+
+    // abstract 함수로 간주. 따라서 구현 필수
+    fun run()
 }
 
 interface Eater {
@@ -24,6 +30,7 @@ interface Eater {
         println("음식을 먹습니다.") // open 함수로 간주
     }
 }
+
 
 class Puppy : Runner, Eater {
     override fun run() {

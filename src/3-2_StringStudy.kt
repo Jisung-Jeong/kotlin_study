@@ -1,19 +1,39 @@
 import java.util.Date
 
 fun main() {
-    stringManage()
+//    stringManage()
+    testTrimIndent()
 }
 
 fun testElvisOperators() {
-    val name1 = readLine()!! // !!는 절대 null이 아닐 경우 사용됨 -> null일 경우 NPE 발생됨
+    /** !!
+     *
+     * Not Null 연산자
+     *
+     * 절대 null이 아닐 경우 사용됨 -> null일 경우 NPE 발생됨
+     */
+    val name1 = readLine()!!
 
     val nullableName = readLine()
 
-    // 대처방안.
-    // 1. 엘비스 연산자(?:) null일 때 기본값 주기
-    nullableName?: "defaultName"
+    /** 1. 엘비스 연산자(?:)
+     *
+     * 좌측 항이 null일 때 기본값을 설정한다.
+     *
+     * ?. 세이프 콜.
+     *
+     * 엘비스 연산자와 짝꿍처럼 쓰인다.
+     *
+     * nullable?. 과 같이 쓸 경우, 좌측이 null이 아닐 경우만 안전하게 length를 가져오도록 한다.
+     *
+     * nullable이 null일 경우 그대로 null을 리턴한다. (NPE 방지)
+     */
+    nullableName ?: "defaultName"
 
-    val length = nullableName?.length?: 0 // nullableName null 일 경우, length도 null이므로 0을 반환.
+    // nullableName 세이프 콜. nullableName이 null이 아닐 경우만 length 호출
+    // 엘비스 연산자. length가 null이면 0 리턴
+    val length = nullableName?.length?: 0
+
 
     // null이면 함수를 종료해버리기
     val name2 = readLine() ?: return
@@ -27,9 +47,11 @@ fun testElvisOperators() {
 fun testTrimIndent() {
     val message = """
         This is triple quote : '${"\"\"\""}'
-    """.trimIndent()
+    """
+    // trimIndent란?
 
-    println(message)
+    println(message) // "        This is triple quote : '"""'"
+    println(message.trimIndent()) // "This is triple quote : '"""'"
 }
 
 fun testLastIndex() {

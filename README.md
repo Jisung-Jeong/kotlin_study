@@ -1,3 +1,7 @@
+
+# 학습 강의 
+> https://www.youtube.com/watch?v=mvfU-7tdLWs&list=PLQdnHjXZyYadiw5aV3p6DwUdXV2bZuhlN&index=14
+
 # 코루틴과 스레드의 차이
 
 코루틴과 스레드의 관계?  

@@ -10,6 +10,17 @@ fun main() {
 }
 
 
+/**
+ * 일반 함수 vs suspend function
+ *
+ * 일반 함수는 어디서나 호출 가능하며, delay나 suspend 같은 코루틴 기능을 쓰지 못한다.
+ *
+ *   :: 아래의 경우 runBlocking과 launch 기능으로 코루틴 세상을 열었기에 가능
+ *
+ * suspend 함수는 코루틴 내부에서만, 혹은 같은 suspend 함수 내부에서만 호출 가능
+ *
+ */
+
 fun create100ThousandCoroutine() {
     val count = 100_000
 
@@ -26,9 +37,16 @@ fun create100ThousandCoroutine() {
         }
     }
 
+    /**
+     * runBlocking vs coroutineScope
+     * runBlocking: 스레드 내 모든 코루틴이 끝날 때까지 스레드 멈춤(약 1mb 스택메모리 유휴 자원을 낭비하는 것)
+     * coroutineScope: 기다리는 동안 스레드를 양보하고 쉰다. 다른 코루틴이 해당 스레드를 사용할 수 있도록 함
+     */
+
     result
-        .onSuccess { value -> println("코루틴 10만 개 완료: $value ms") // 1362ms
-        }.onFailure { exception -> println("에러: ${exception.message}") }
+        .onSuccess { value -> println("코루틴 10만 개 완료: $value ms") } // 1362ms
+        .onFailure { exception -> println("에러: ${exception.message}") }
+        .also { println("무조건 실행되는 코드. finally같은 느낌") }
 }
 
 fun create100ThousandThread() {
