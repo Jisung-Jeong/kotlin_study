@@ -3,6 +3,7 @@ abstract class Animal2(val name: String, val age: Int, val type: String) {
     // 따라서 클래스와 메서드 둘 다 abstract 키워드를 써준다.
     abstract fun eat()
 
+    // open 안썼으므로 오버라이드 불가능
     fun sniff() {
         println("킁킁")
     }
@@ -13,6 +14,10 @@ class Dog2(name: String, age: Int, type: String) : Animal1(name, age, "개") {
     override fun eat() {
         println("개가 밥을 먹습니다.")
     }
+//    오버라이딩 안 되는데 재정의 시, 컴파일 에러 발생
+//    fun sniff() {
+//        println("킁킁")
+//    }
 }
 
 // 인터페이스는 모든 함수가 추상화된, 순수 추상화 객체를 뜻한다.

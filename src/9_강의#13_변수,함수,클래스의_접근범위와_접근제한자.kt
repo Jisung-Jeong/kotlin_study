@@ -13,7 +13,7 @@ class StudyScopeAndAccessModifier {
 
         // 한 스코프 안에선 특정한 import 선언 없이도 자신들끼리 요소의 공유가 가능하다.
 
-        // 패키지 명을 명시하지 않으면, 'Default package' 에 소속된다.
+        // 패키지 명을 명시하지 않으면, 'Default package 스코프' 에 소속된다.
 
         /**
          * 스코프 외부에서 내부로 접근하려면 "참조 연산자"를 사용하여야 한다.(접근 제한자)

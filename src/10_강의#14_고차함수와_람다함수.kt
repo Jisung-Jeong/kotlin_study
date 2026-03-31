@@ -40,6 +40,43 @@ fun main() {
     var c2 = { str: String -> println("$str 람다함수") }
     b(c2)
 
+    // 파라미터가 여러개인 람다함수
+    // 1. 소괄호가 아니라, 변수를 쉼표로 구분한다.
+    var k :(String, Int) -> String = label@{ str, x ->
+        "중괄호는 중복으로 쓰지 않는다."
+        "자동으로 마지막 줄이 return 값으로 지정된다."
+        "따라서 return을 따로 써 줄 필요가 없다."
+
+        "그러나 중간에 리턴할 경우, return@label 과 같이 써주면 된다."
+        return@label "str: $str, x: $x"
+        "또한 중괄호 시작 부분에도 label@ 을 써주어야 한다."
+    }
+}
+
+/**
+ * 1. 람다 함수에 여러 구문을 쓸 수 있다.
+ * 그리고 마지막 줄이 반환된다.
+ */
+val example1 :(Int, Int) -> Int = { a, b ->
+    println(a)
+    println(b)
+    a+b // a+b가 마지막 줄이므로 반환됨
+}
+
+/**
+ * 2. 람다 함수에 파라미터가 없을 경우?
+ * 실행할 구문만 나열한다.
+ */
+val example2 :() -> Unit = {
+    println("파라미터가 없을 경우, 실행할 구문만 나열한다.")
+}
+
+/**
+ * 3. 파라미터가 하나만 있을 경우
+ * 파라미터 이름을 생략하고 it으로 사용할 수 있다.
+ */
+val example3 :(String) -> Unit = {
+    println("파라미터 이름을 it으로 사용 가능: $it")
 }
 
 
