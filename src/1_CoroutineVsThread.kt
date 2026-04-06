@@ -1,12 +1,18 @@
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
+import kotlin.concurrent.thread
 import kotlin.system.measureTimeMillis
 
 fun main() {
     create100ThousandCoroutine()
     create100ThousandThread()
-    testSortedSetOf()
+//    testSortedSetOf()
 }
 
 
@@ -24,7 +30,7 @@ fun main() {
 fun create100ThousandCoroutine() {
     val count = 100_000
 
-    val result = runCatching {
+    val result = runCatching { // try-catch문을 가독성 좋게 사용
         measureTimeMillis { // 얼마만큼의 ms 가 걸리는지 측정하는 메서드
             runBlocking { // 내부의 모든 코루틴이 끝날 때까지 현재 스레드를 멈추고(Blocking) 기다립니다.
                 repeat(count) { // 지정된 횟수(count)만큼 반복한다.
@@ -55,9 +61,10 @@ fun create100ThousandThread() {
     try {
         val threadTimes = measureTimeMillis {
             val threads = List(count) { // 크기가 count인 List를 만들고, 중괄호 내의 내용으로 리스트를 채운다.
-//                thread { // 스레드 생성
-                Thread.startVirtualThread { // 가상 스레드 생성 - java 판 코루틴이라고 보면 됨
-                    Thread.sleep(1000L) // 1초 대기 (차단)
+                thread { // 스레드 생성
+//                    Thread.startVirtualThread { // 가상 스레드 생성 - java 판 코루틴이라고 보면 됨
+                        Thread.sleep(1000L) // 1초 대기 (차단)
+//                    }
                 }
             }
             threads.forEach { it.join() } // join()은 해당 스레드가 종료될 때 까지 메인 스레드를 멈추게 한다.
@@ -74,5 +81,40 @@ fun testSortedSetOf() {
     val set = sortedSetOf(Double.NaN, Double.NaN, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY, 0.0)
     println(set) // [-infinity, 0.0, infinity, NaN]
 }
+
+// syncronized 함수: 한 번에 한 개의 스레드만 해당 함수를 실행할 수 있도록 한다. (전통적 방식)
+// 이 안에서 가상 스레드 I/O 작업 시, 실제 OS 스레드도 같이 묶여버리는 Pinning 현상이 발생한다.
+// 코루틴 안에서 syncronized 사용 시 컴파일 에러 발생. 안에서 delay와 같은 suspend 함수 호출 불가함.
+
+// 코루틴 함수에서, 한 번에 한 개의 코루틴만 함수를 실행하게 하려면?
+// Mutex.withLock {} 사용(suspend 함수 내에서만 가능)
+val mutex = Mutex()
+var loadCount = 0
+
+suspend fun updateProgress() {
+    mutex.withLock {
+        // 안전하게 데이터 수정
+        loadCount++
+        // 여기서 다른 suspend 함수 호출도 가능!
+    }
+}
+
+// 위와 같은 방식을 MutableStateFlow로도 사용 가능
+class mutatableTest {
+    private val _loadCount = MutableStateFlow(0)
+    val loadCountMutable = _loadCount.asStateFlow()
+
+    fun updateTest() {
+        _loadCount.update { it + 1}
+    }
+    // update가 안전한 이유: 작동원리
+    // 1. 현재 값을 읽음
+    // 2. 함수 내부 연산 수행
+    // 3. 값을 바꾸기 직전 '1번에서 읽었던 값'과 '현재 값' 비교,
+    // 같으면 update 수행, 다르면 1번부터 다시 수행
+}
+
+
+
 
 

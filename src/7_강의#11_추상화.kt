@@ -34,6 +34,8 @@ interface Eater {
     fun eat() {
         println("음식을 먹습니다.") // open 함수로 간주
     }
+
+    fun howToEat() // abstract 함수로 간주
 }
 
 
@@ -44,5 +46,9 @@ class Puppy : Runner, Eater {
 
     override fun eat() {
         println("강아지가 먹습니다.") // 오버라이딩
+    }
+
+    override fun howToEat() {
+        println("러너가 먹는 방법")
     }
 }

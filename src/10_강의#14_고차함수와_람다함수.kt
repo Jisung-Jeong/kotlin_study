@@ -36,8 +36,9 @@ fun main() {
     val c :(String) -> Unit = { str -> println("$str 람다함수") }
     b(c) // b가 호출한 람다함수
 
-    // 이렇게 써도 됨
+    // 이렇게 써도 됨(타입추론 간소화)
     var c2 = { str: String -> println("$str 람다함수") }
+
     b(c2)
 
     // 파라미터가 여러개인 람다함수

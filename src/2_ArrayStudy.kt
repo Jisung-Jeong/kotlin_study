@@ -13,7 +13,7 @@ fun createArray() {
 fun lambdaAndArray() {
     val size = readLine()!!.toInt() // 반드시 입력은 int 형으로
     // !!: Not-Null 연산자
-    // null.toInt() 시 에러 남.
+    // null.toInt() 시 컴파일 에러 남.
     // 그러나 확실히 값이 존재할 때 !!를 써서 에러가 나지 않음을 확신시켜준다.
 
     val squares = Array(size) { // size 만큼 array에 중괄호 내부 내용을 add한다.
@@ -50,7 +50,7 @@ fun typedArray() {
 fun arrayManage() {
     // 코틀린의 변수는 참조형 변수이다.
     // squares라는 변수에 배열의 주소를 가져다 붙이는 형식
-    val squares = arrayOf(1, 2, 3, 4)
+    val squares = arrayOf(1, 2, 3, 4) // 타입 추론
     squares.size // 4
     squares.lastIndex // 3
     squares[2] // 3
@@ -102,4 +102,6 @@ fun compareOperator() {
     // 내용을 비교하려면 contentEquals()를 써야 한다.
     println("a == b : ${a == b}") // false
     println("a.contentEquals(b) = ${a.contentEquals(b)}") // true
+
+    println("a.take(2): ${a.take(2)}")
 }
